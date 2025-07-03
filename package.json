@@ -1,5 +1,5 @@
 {
-  "name": "template",
+  "name": "dev-robiul-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -46,3 +46,4 @@
     "typescript-eslint": "^8.24.1"
   }
 }
+
