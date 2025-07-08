@@ -31,10 +31,6 @@ const ProjectSchema = new Schema<IProject>({
     type: String,
     required: true,
   },
-  color: {
-    type: String,
-    required: true,
-  },
   serial: {
     type: Number,
     required: true,

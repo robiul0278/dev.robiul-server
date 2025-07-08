@@ -16,8 +16,6 @@ const createProject = catchAsync(async (req, res) => {
     })
 })
 const getAllProject = catchAsync(async (req, res) => {
-    // console.log("USER", req.user);
-    // console.log("TOKEN", req.cookies);
     const result = await productServices.getAllProjectDB();
 
     sendResponse(res, {
@@ -27,8 +25,22 @@ const getAllProject = catchAsync(async (req, res) => {
         data: result,
     })
 })
+const deleteProject = catchAsync(async (req, res) => {
+    const {id} = req.params;
+
+    const result = await productServices.deleteProjectDB(id);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Project delete successfully!",
+        data: result,
+    })
+})
 
 export const productController = {
     createProject,
     getAllProject,
+    deleteProject,
 }
+

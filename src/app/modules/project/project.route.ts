@@ -6,7 +6,6 @@ import { USER_ROLE } from "../auth/auth.constant";
 
 const router = express.Router();
 
-// call controller function 
 router.post('/create',
     validateRequest(projectValidationSchema),
     productController.createProject
@@ -14,6 +13,9 @@ router.post('/create',
 
 router.get('/', 
     productController.getAllProject
+);
+router.delete('/delete/:id', 
+    productController.deleteProject
 );
 
 export const projectRoutes = router;
