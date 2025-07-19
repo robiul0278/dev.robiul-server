@@ -27,13 +27,36 @@ const getAllProject = catchAsync(async (req, res) => {
 })
 const deleteProject = catchAsync(async (req, res) => {
     const {id} = req.params;
-
+    
     const result = await productServices.deleteProjectDB(id);
-
     sendResponse(res, {
         statusCode: httpStatus.OK,
         success: true,
         message: "Project delete successfully!",
+        data: result,
+    })
+})
+const updateProject = catchAsync(async (req, res) => {
+
+    const {id} = req.params;
+    const data = req.body;
+
+    const result = await productServices.updateProjectDB(id,data);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Project update successfully!",
+        data: result,
+    })
+})
+const singleProject = catchAsync(async (req, res) => {
+    const {id} = req.params;
+
+    const result = await productServices.singleProjectDB(id);
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Get single data successfully!",
         data: result,
     })
 })
@@ -42,5 +65,7 @@ export const productController = {
     createProject,
     getAllProject,
     deleteProject,
+    updateProject,
+    singleProject
 }
 

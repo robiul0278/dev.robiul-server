@@ -6,5 +6,6 @@ export type IProject = {
   liveLink: string;
   frontend: string;
   backend: string;
-  serial: number;
+  serial: string;
+  description: string;
 };

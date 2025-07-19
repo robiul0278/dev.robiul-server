@@ -17,5 +17,13 @@ router.get('/',
 router.delete('/delete/:id', 
     productController.deleteProject
 );
+router.patch('/update/:id', 
+    validateRequest(projectValidationSchema),
+    productController.updateProject
+);
+router.get('/single/:id', 
+    productController.singleProject
+);
 
 export const projectRoutes = router;
+

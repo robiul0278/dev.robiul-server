@@ -32,7 +32,11 @@ const ProjectSchema = new Schema<IProject>({
     required: true,
   },
   serial: {
-    type: Number,
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
     required: true,
   },
 });
