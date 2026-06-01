@@ -12,6 +12,7 @@ export const projectValidationSchema = z.object({
     backend: z.string().url("Must be a valid URL"),
     serial: z.string().min(1,"Serial must be a positive number"),
     description: z.string().min(10, "Description must be at least 10 characters long"),
-
+    category: z.string().optional(),
+    status: z.enum(["active", "archived"]).default("active").optional(),
   })
 });

@@ -5,7 +5,7 @@ import httpStatus from 'http-status';
 import jwt from 'jsonwebtoken';
 import config from '../../../config';
 import { z } from 'zod';
-import validateRequest from '../../../middleware/validateRequest';
+import validateRequest from '../../middleware/validateRequest';
 
 const adminLoginSchema = z.object({
   body: z.object({

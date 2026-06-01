@@ -39,6 +39,15 @@ const ProjectSchema = new Schema<IProject>({
     type: String,
     required: true,
   },
+  category: {
+    type: String,
+    default: "",
+  },
+  status: {
+    type: String,
+    enum: ["active", "archived"],
+    default: "active",
+  },
 });
 
 export const projectModel = model<IProject>("Project", ProjectSchema);

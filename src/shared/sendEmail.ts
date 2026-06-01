@@ -3,20 +3,19 @@ import config from "../config";
 
 export const sendEmail = async (to: string, link: string) => {
     const transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 587,
+        host: config.smtp_host,
+        port: config.smtp_port,
         secure: config.node_env === "production",
         auth: {
-            user: "robiul0278@gmail.com",
-            pass: "lswv vltp wacq dctd",
+            user: config.smtp_user,
+            pass: config.smtp_pass,
         },
     });
 
     await transporter.sendMail({
-        from: 'robiul0278@gmail.com',
+        from: config.smtp_from,
         to,
         subject: "Reset your password within 10 minutes",
-        // text: `Change password please. Reset link: ${link}`,
         html: `
         <div style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 30px;">
         <div style="max-width: 600px; margin: auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
@@ -33,7 +32,7 @@ export const sendEmail = async (to: string, link: string) => {
          <p>Thanks,<br>The YourApp Team</p>
          </div>
          <div style="background-color: #f0f0f0; color: #888; text-align: center; font-size: 12px; padding: 20px;">
-         <p>© 2025 YourApp. All rights reserved.</p>
+         <p>&copy; 2025 YourApp. All rights reserved.</p>
          </div>
          </div>
         </div>

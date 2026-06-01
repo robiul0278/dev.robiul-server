@@ -8,4 +8,6 @@ export type IProject = {
   backend: string;
   serial: string;
   description: string;
+  category?: string;
+  status?: "active" | "archived";
 };

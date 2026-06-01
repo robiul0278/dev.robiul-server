@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config({ path: path.join((process.cwd(), '.env')) });
+dotenv.config({ path: path.join(process.cwd(), '.env') });
 
 export default {
   // DEPLOYMENT 
@@ -24,5 +24,15 @@ export default {
   admin_password: process.env.ADMIN_PASSWORD as string,
 
   // RESET PASSWORD 
-  reset_password_ui_link: process.env.RESET_PASSWORD_UI_LINK 
+  reset_password_ui_link: process.env.RESET_PASSWORD_UI_LINK,
+
+  // CORS
+  cors_origins: process.env.CORS_ORIGINS?.split(',') || ['http://localhost:3000'],
+
+  // SMTP Email
+  smtp_host: process.env.SMTP_HOST || 'smtp.gmail.com',
+  smtp_port: Number(process.env.SMTP_PORT) || 587,
+  smtp_user: process.env.SMTP_USER as string,
+  smtp_pass: process.env.SMTP_PASS as string,
+  smtp_from: process.env.SMTP_FROM || process.env.SMTP_USER,
 };
