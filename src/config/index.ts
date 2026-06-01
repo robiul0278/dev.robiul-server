@@ -20,6 +20,9 @@ export default {
   jwt_secret_expiration: process.env.JWT_SECRET_EXPIRATION as string,
   jwt_refresh_expiration: process.env.JWT_REFRESH_EXPIRATION,
 
+  // ADMIN PASSWORD
+  admin_password: process.env.ADMIN_PASSWORD as string,
+
   // RESET PASSWORD 
   reset_password_ui_link: process.env.RESET_PASSWORD_UI_LINK 
 };
