@@ -14,6 +14,7 @@ export interface IHeroContent {
   resumeUrl: string;
   availabilityText: string;
   experienceBadge: string;
+  profileImage?: string;
   stats: { value: string; label: string }[];
   socialLinks: ISocialLink[];
 }

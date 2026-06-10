@@ -2,12 +2,14 @@ import { Server } from 'http';
 import app from './app';
 import mongoose from 'mongoose';
 import config from './config';
+import { contentServices } from './app/modules/content/content.service';
 
 let server: Server;
 
 async function main() {
   try {
     await mongoose.connect(config.database_url as string);
+    await contentServices.seedDefaultContent();
     
     server = app.listen(config.port, () => {
       console.log(`Example app listening on port ${config.port} 😍`);

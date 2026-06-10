@@ -17,6 +17,7 @@ const HeroContentSchema = new Schema({
   resumeUrl: { type: String, required: true },
   availabilityText: { type: String, required: true },
   experienceBadge: { type: String, required: true },
+  profileImage: { type: String },
   stats: { type: [{ value: String, label: String }], required: true },
   socialLinks: { type: [SocialLinkSchema], required: true },
 }, { _id: false });
