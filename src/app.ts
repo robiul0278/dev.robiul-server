@@ -32,9 +32,7 @@ const authLimiter = rateLimit({
 
 // CORS configuration
 const corsOptions = {
-  origin: config.node_env === 'production'
-    ? ['https://dev.robiul.com', 'https://www.dev.robiul.com']
-    : ['http://localhost:3000', 'http://localhost:5173'],
+  origin: config.cors_origins,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
