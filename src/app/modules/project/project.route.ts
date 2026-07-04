@@ -1,6 +1,6 @@
 import express from "express";
 import validateRequest from "../../middleware/validateRequest";
-import { projectValidationSchema } from "./project.validation";
+import { projectValidationSchema, projectUpdateValidationSchema } from "./project.validation";
 import { productController } from "./project.controller";
 import authGard from "../../middleware/authGard";
 
@@ -21,7 +21,7 @@ router.delete('/delete/:id',
 );
 router.patch('/update/:id', 
     authGard('admin'),
-    validateRequest(projectValidationSchema),
+    validateRequest(projectUpdateValidationSchema),
     productController.updateProject
 );
 router.get('/single/:id', 

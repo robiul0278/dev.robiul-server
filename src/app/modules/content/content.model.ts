@@ -22,15 +22,6 @@ const HeroContentSchema = new Schema({
   socialLinks: { type: [SocialLinkSchema], required: true },
 }, { _id: false });
 
-const AboutContentSchema = new Schema({
-  subtitle: { type: String, required: true },
-  titleHighlight: { type: String, required: true },
-  paragraphs: { type: [String], required: true },
-  highlights: { type: [{ icon: String, title: String, description: String }], required: true },
-  timeline: { type: [{ year: String, title: String, description: String }], required: true },
-  stats: { type: [{ value: Number, suffix: String, label: String }], required: true },
-  cvUrl: { type: String, required: true },
-}, { _id: false });
 
 const SkillCategorySchema = new Schema({
   id: { type: String, required: true },
@@ -94,21 +85,6 @@ const ServicesContentSchema = new Schema({
   process: { type: [ProcessStepSchema], required: true },
 }, { _id: false });
 
-const TestimonialSchema = new Schema({
-  name: { type: String, required: true },
-  role: { type: String, required: true },
-  location: { type: String, required: true },
-  avatar: { type: String, required: true },
-  content: { type: String, required: true },
-  rating: { type: Number, required: true },
-}, { _id: false });
-
-const TestimonialsContentSchema = new Schema({
-  subtitle: { type: String, required: true },
-  titleHighlight: { type: String, required: true },
-  testimonials: { type: [TestimonialSchema], required: true },
-}, { _id: false });
-
 const ContactContentSchema = new Schema({
   subtitle: { type: String, required: true },
   titleHighlight: { type: String, required: true },
@@ -134,11 +110,10 @@ const FooterContentSchema = new Schema({
 const SiteContentSchema = new Schema<ISiteContent>(
   {
     hero: { type: HeroContentSchema, required: true },
-    about: { type: AboutContentSchema, required: true },
+
     skills: { type: SkillsContentSchema, required: true },
     experience: { type: ExperienceContentSchema, required: true },
     services: { type: ServicesContentSchema, required: true },
-    testimonials: { type: TestimonialsContentSchema, required: true },
     contact: { type: ContactContentSchema, required: true },
     footer: { type: FooterContentSchema, required: true },
   },

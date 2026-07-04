@@ -19,15 +19,6 @@ export interface IHeroContent {
   socialLinks: ISocialLink[];
 }
 
-export interface IAboutContent {
-  subtitle: string;
-  titleHighlight: string;
-  paragraphs: string[];
-  highlights: { icon: string; title: string; description: string }[];
-  timeline: { year: string; title: string; description: string }[];
-  stats: { value: number; suffix: string; label: string }[];
-  cvUrl: string;
-}
 
 export interface ISkillCategory {
   id: string;
@@ -91,21 +82,6 @@ export interface IServicesContent {
   process: IProcessStep[];
 }
 
-export interface ITestimonial {
-  name: string;
-  role: string;
-  location: string;
-  avatar: string;
-  content: string;
-  rating: number;
-}
-
-export interface ITestimonialsContent {
-  subtitle: string;
-  titleHighlight: string;
-  testimonials: ITestimonial[];
-}
-
 export interface IContactContent {
   subtitle: string;
   titleHighlight: string;
@@ -130,11 +106,10 @@ export interface IFooterContent {
 
 export interface ISiteContent {
   hero: IHeroContent;
-  about: IAboutContent;
+
   skills: ISkillsContent;
   experience: IExperienceContent;
   services: IServicesContent;
-  testimonials: ITestimonialsContent;
   contact: IContactContent;
   footer: IFooterContent;
 }

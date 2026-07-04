@@ -16,3 +16,7 @@ export const projectValidationSchema = z.object({
     status: z.enum(["active", "archived"]).default("active").optional(),
   })
 });
+
+export const projectUpdateValidationSchema = z.object({
+  body: projectValidationSchema.shape.body.partial(),
+});

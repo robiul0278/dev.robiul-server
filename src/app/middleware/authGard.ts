@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt, { JwtPayload, TokenExpiredError } from "jsonwebtoken";
 import config from "../../config";
 import catchAsync from "../../shared/catchAsync";
 import AppError from "../errors/AppError";
@@ -11,39 +11,44 @@ const authGard = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
 
 
-    const token = req.headers.authorization;
+    const authHeader = req.headers.authorization;
 
-    if (!token) {
+    if (!authHeader) {
       throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized!");
     }
+    const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : authHeader;
     //! checking if the given token is valid
-    const decoded = jwt.verify(token, config.jwt_secret_token as string) as JwtPayload;
+    let decoded: JwtPayload;
+    try {
+      decoded = jwt.verify(token, config.jwt_secret_token as string) as JwtPayload;
+    } catch (err) {
+      if (err instanceof TokenExpiredError) {
+        throw new AppError(httpStatus.UNAUTHORIZED, "jwt expired");
+      }
+      throw new AppError(httpStatus.UNAUTHORIZED, "Invalid token");
+    }
     const { role, userId } = decoded;
+
+    // Admin auth: skip DB lookup (admin is password-only, no user record)
+    if (role === 'admin') {
+      if (requiredRoles && !requiredRoles.includes('admin')) {
+        throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized!");
+      }
+      (req as any).user = decoded as JwtPayload & { role: string };
+      return next();
+    }
 
     //! checking if the user is exist
     const user = await userModel.findById({ _id: userId });
     if (!user) {
       throw new AppError(httpStatus.NOT_FOUND, "This user is not found !");
     }
-    //! checking if the user is already deleted
-    // const isDeleted = user?.isDeleted;
-
-    // if (isDeleted) {
-    //   throw new AppError(httpStatus.FORBIDDEN, "This user is deleted !");
-    // }
-
-    //! checking if the user is blocked
-    // const userStatus = user?.status;
-
-    // if (userStatus === "blocked") {
-    //   throw new AppError(httpStatus.FORBIDDEN, "This user is blocked ! !");
-    // }
 
     if (requiredRoles && !requiredRoles.includes(role)) {
-      throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized bro!");
+      throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized!");
     }
 
-    req.user = decoded as JwtPayload & { role: string };
+    (req as any).user = decoded as JwtPayload & { role: string };
     next();
   });
 };
